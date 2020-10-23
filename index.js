@@ -5,18 +5,21 @@ function watchForm() {
   $('#js-form').submit(event => {
     event.preventDefault();
     const numberOfParks = $('#search-qty').val();
+    const desiredState = $('#search-state').val();
     console.log(numberOfParks);
-    if (!numberOfParks) {
-      getResults("10");
+    console.log(desiredState);
+    if (!numberOfParks && !desiredState) {
+      getResults("10", "ca");
     } else {
-      getResults(numberOfParks);
+      getResults(numberOfParks, desiredState);
     }
   });
 }
 
-function getResults(numberOfParks) {
+function getResults(numberOfParks, desiredState) {
   console.log(numberOfParks);
-  fetch(`https://developer.nps.gov/api/v1/parks?api_key=LjDGflPb5rpTne1YebbvKcvQv3UOczyGWZfXyJ0l&stateCode=ca&limit=${numberOfParks}`)
+  console.log(desiredState);
+  fetch(`https://developer.nps.gov/api/v1/parks?api_key=LjDGflPb5rpTne1YebbvKcvQv3UOczyGWZfXyJ0l&stateCode=${desiredState}&limit=${numberOfParks}`)
     .then(response => {
       if (response.ok) {
         response.json().then(function(responseJson) {
