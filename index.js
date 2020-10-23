@@ -1,44 +1,48 @@
 'use strict';
 
-REWORK FUNCTIONS, WHAT VARIABLES NEED GLOBAL SCOPE 
-
 
 function watchForm() {
-$('form').submit(event => {
+  $('#js-form').submit(event => {
     event.preventDefault();
-   
+    const numberOfParks = $('#search-qty').val();
+    console.log(numberOfParks);
+    if (!numberOfParks) {
+      getResults("10");
+    } else {
+      getResults(numberOfParks);
+    }
   });
 }
 
-function getResults(){
- console.log(parameter(s));
- fetch(`____`)
+function getResults(numberOfParks) {
+  console.log(numberOfParks);
+  fetch(`https://developer.nps.gov/api/v1/parks?api_key=LjDGflPb5rpTne1YebbvKcvQv3UOczyGWZfXyJ0l&stateCode=ca&limit=10`)
     .then(response => {
       if (response.ok) {
-        return response.json();
-      }
+        response.json().then(function(responseJson) {
+          displayResults(responseJson);
+        });
+      } 
     })
-    .then(responseJson => displayResults(responseJson))
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
 }
 
-function displayResults() {
- console.log(responseJson);
+function displayResults(responseJson) {
+  console.log(responseJson);
   $('#results-list').empty();
-  let searchResults = responseJson.message;
-  for (let i = 0; i < responseJson.length; i++) {
-    $('#results-list').append(
-      `<li><h3>${responseJson[i].name}</h3>
-      <p><a href="${responseJson[i].html_url}">${responseJson[i].html_url}</a></p>
+  let searchResults = responseJson['data']; 
+  for (let i = 0; i < searchResults.length; i++) {
+   $('#results-list').append(
+     `<li><h3>${searchResults[i].fullName}</h3>
+      <p><a href="${searchResults[i].directionsUrl}">${searchResults[i].description}</a></p>
       </li>`
-    )};
-    $('#results').removeClass('hidden');
+      )
   };
+  $('#results').removeClass('hidden');
+};
 
-
-
-
-
-
+$(document).ready(function() {
+  watchForm();
+ });
