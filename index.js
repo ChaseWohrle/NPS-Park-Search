@@ -37,6 +37,7 @@ function displayResults(responseJson) {
    $('#results-list').append(
      `<li><h3>${searchResults[i].fullName}</h3>
       <p><a href="${searchResults[i].directionsUrl}">${searchResults[i].description}</a></p>
+      <p>${searchResults[i].url}</p>
       </li>`
       )
   };
