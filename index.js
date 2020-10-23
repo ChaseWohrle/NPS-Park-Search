@@ -14,7 +14,7 @@ function watchForm() {
   });
 }
 
-let numberOfPark = ;
+let numberOfParks = ;
 
 function getResults(numberOfParks) {
   console.log(numberOfParks);
