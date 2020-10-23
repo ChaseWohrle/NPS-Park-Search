@@ -16,7 +16,7 @@ function watchForm() {
 
 function getResults(numberOfParks) {
   console.log(numberOfParks);
-  fetch(`https://developer.nps.gov/api/v1/parks?api_key=LjDGflPb5rpTne1YebbvKcvQv3UOczyGWZfXyJ0l&stateCode=ca&limit=10`)
+  fetch(`https://developer.nps.gov/api/v1/parks?api_key=LjDGflPb5rpTne1YebbvKcvQv3UOczyGWZfXyJ0l&stateCode=ca`)
     .then(response => {
       if (response.ok) {
         response.json().then(function(responseJson) {
