@@ -14,6 +14,8 @@ function watchForm() {
   });
 }
 
+let numberOfPark = ;
+
 function getResults(numberOfParks) {
   console.log(numberOfParks);
   fetch(`https://developer.nps.gov/api/v1/parks?api_key=LjDGflPb5rpTne1YebbvKcvQv3UOczyGWZfXyJ0l&stateCode=ca`)
